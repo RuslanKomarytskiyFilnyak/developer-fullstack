@@ -12,7 +12,6 @@ export function Home() {
         <>
             <ScrollProgress />
             <ScrollToTop />
-            <Header />
             <main>
                 <Hero />
                 <About />

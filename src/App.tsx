@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import { Home } from './components/Home';
 import { PrivacyPolicy } from './components/PrivacyPolicy';
 import { AnimatedBackground } from './components/AnimatedBackground';
+import { Header } from './components/Header';
 import { initGA } from './utils/analytics';
 
 export default function App() {
@@ -13,9 +14,10 @@ export default function App() {
   }, []);
 
   return (
-    <div className="min-h-screen relative">
+    <div className="min-h-screen relative overflow-x-hidden">
       <AnimatedBackground />
-      <div className="relative z-10">
+      <Header />
+      <div className="relative">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
