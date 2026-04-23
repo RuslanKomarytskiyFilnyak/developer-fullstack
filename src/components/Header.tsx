@@ -65,10 +65,15 @@ export function Header() {
             <Menu size={28} />
           </button>
 
-          <div className="hidden md:flex gap-10">
+          <div className="hidden md:flex items-center gap-10">
             {navItems.map((item) => (
-              <button key={item.id} onClick={() => scrollToSection(item.id)} className="text-slate-300 hover:text-white transition-colors">
+              <button 
+                key={item.id} 
+                onClick={() => scrollToSection(item.id)} 
+                className="text-sm font-medium text-slate-300 hover:text-white transition-colors relative group py-2"
+              >
                 {item.label}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-cyan-400 group-hover:w-full transition-all duration-300"></span>
               </button>
             ))}
           </div>
