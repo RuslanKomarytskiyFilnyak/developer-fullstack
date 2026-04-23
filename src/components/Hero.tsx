@@ -1,5 +1,6 @@
 import { motion } from 'motion/react';
-import { ArrowDown, Github, Linkedin, Mail, Phone } from 'lucide-react';
+import { ArrowDown, Github, Linkedin, Mail } from 'lucide-react';
+import { FaWhatsapp } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
 
 export function Hero() {
@@ -82,10 +83,12 @@ export function Hero() {
               <Mail size={24} />
             </a>
             <a
-              href="tel:618478435"
+              href="https://wa.me/34618478435"
+              target="_blank"
+              rel="noopener noreferrer"
               className="p-3 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-cyan-400 rounded-lg transition-all duration-300 hover:scale-110"
             >
-              <Phone size={24} />
+              <FaWhatsapp size={24} />
             </a>
           </motion.div>
 

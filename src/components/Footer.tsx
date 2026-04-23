@@ -1,4 +1,5 @@
-import { Github, Linkedin, Mail, Heart, Phone } from 'lucide-react';
+import { Github, Linkedin, Mail, Heart } from 'lucide-react';
+import { FaWhatsapp } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 export function Footer() {
@@ -38,10 +39,12 @@ export function Footer() {
               <Mail size={20} />
             </a>
             <a
-              href="tel:618478435"
+              href="https://wa.me/34618478435"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-slate-400 hover:text-cyan-400 transition-colors"
             >
-              <Phone size={20} />
+              <FaWhatsapp size={20} />
             </a>
           </div>
         </div>
