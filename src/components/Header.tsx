@@ -56,41 +56,36 @@ export function Header() {
           boxShadow: isScrolled ? '0 10px 30px -10px rgba(0,0,0,0.5)' : 'none'
         }}
       >
-        <nav className="container mx-auto px-6 h-full flex items-center justify-between">
-          <div onClick={() => scrollToSection('hero')} className="text-xl font-bold text-white cursor-pointer select-none">
+        <nav className="container mx-auto px-6 h-full flex items-center justify-between gap-4">
+          {/* Logo */}
+          <div 
+            onClick={() => scrollToSection('hero')} 
+            className="text-xl md:text-2xl font-bold text-white cursor-pointer select-none whitespace-nowrap flex-shrink-0"
+          >
             <span className="text-cyan-400">{'<'}</span> Ruslan <span className="text-blue-500">{'/>'}</span>
           </div>
 
-          <button onClick={() => setIsMobileMenuOpen(true)} className="md:hidden p-2 text-white bg-slate-800 rounded-lg">
-            <Menu size={28} />
-          </button>
-
-          <div 
-            className="hidden md:flex"
-            style={{ display: 'flex', alignItems: 'center' }}
-          >
-            {navItems.map((item, index) => (
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center gap-6 lg:gap-10">
+            {navItems.map((item) => (
               <button 
                 key={item.id} 
                 onClick={() => scrollToSection(item.id)} 
-                className="text-base font-semibold text-slate-300 hover:text-white transition-colors group"
-                style={{ 
-                  position: 'relative', 
-                  marginLeft: index === 0 ? '0px' : '50px',
-                  padding: '8px 0',
-                  background: 'none',
-                  border: 'none',
-                  cursor: 'pointer'
-                }}
+                className="text-sm lg:text-base font-medium text-slate-300 hover:text-white transition-colors relative group py-2 whitespace-nowrap"
               >
                 {item.label}
-                <div 
-                  className="absolute left-0 w-0 h-[2px] bg-cyan-400 group-hover:w-full transition-all duration-300"
-                  style={{ bottom: '0px' }}
-                ></div>
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-cyan-400 group-hover:w-full transition-all duration-300"></span>
               </button>
             ))}
           </div>
+
+          {/* Mobile Menu Toggle */}
+          <button 
+            onClick={() => setIsMobileMenuOpen(true)} 
+            className="md:hidden p-2 text-white bg-slate-800 rounded-lg flex-shrink-0"
+          >
+            <Menu size={24} />
+          </button>
         </nav>
       </header>
 
@@ -102,45 +97,44 @@ export function Header() {
             exit={{ x: '100%' }}
             transition={{ type: 'tween', duration: 0.3 }}
             style={{
-              position: 'fixed',
-              top: 0,
-              left: 0,
-              width: '100%',
-              height: '100%',
-              backgroundColor: '#0f172a',
-              zIndex: 1000000,
-              display: 'flex',
-              flexDirection: 'column',
-              opacity: 1
+                position: 'fixed',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+                backgroundColor: '#0f172a',
+                zIndex: 1000000,
+                display: 'flex',
+                flexDirection: 'column'
             }}
           >
-            <div className="flex items-center justify-between px-8 h-24 border-b border-white/10">
-              <span className="text-2xl font-bold text-cyan-400">MENÚ</span>
+            <div className="flex items-center justify-between px-8 h-20 border-b border-white/10">
+              <span className="text-xl font-bold text-cyan-400">NAVEGACIÓN</span>
               <button 
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="p-4 text-white bg-slate-800 rounded-2xl"
+                className="p-3 text-white bg-slate-800 rounded-xl"
               >
-                <X size={32} />
+                <X size={28} />
               </button>
             </div>
 
-            <div className="flex flex-col p-10 gap-6">
+            <div className="flex-1 flex flex-col p-8 gap-4 overflow-y-auto">
               {navItems.map((item) => (
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className="flex items-center gap-6 p-6 bg-slate-800 rounded-3xl border border-white/5 active:scale-95 transition-transform"
+                  className="flex items-center gap-5 p-5 bg-slate-800/50 rounded-2xl border border-white/5 active:scale-95 transition-transform text-left"
                 >
                   <div className="text-cyan-400 bg-cyan-400/10 p-3 rounded-xl">
-                    <item.icon size={32} />
+                    <item.icon size={24} />
                   </div>
-                  <span className="text-2xl font-bold text-white">{item.label}</span>
+                  <span className="text-xl font-bold text-white">{item.label}</span>
                 </button>
               ))}
             </div>
 
-            <div className="mt-auto p-12 text-center">
-              <p className="text-slate-500 font-mono tracking-widest text-sm uppercase">Ruslan Portfolio © 2026</p>
+            <div className="p-10 text-center border-t border-white/5">
+              <p className="text-slate-600 font-mono text-xs uppercase tracking-widest">Ruslan Portfolio © 2026</p>
             </div>
           </motion.div>
         )}
