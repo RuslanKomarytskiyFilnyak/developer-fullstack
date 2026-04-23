@@ -246,7 +246,7 @@ export function Technologies() {
         </motion.div>
 
         {showMemoryGame ? (
-          <div className="w-full flex gap-6 mb-16 min-h-[600px] bg-slate-900/30 rounded-2xl p-8 border border-slate-700/50">
+          <div className="w-full flex gap-6 mb-16 min-h-fit sm:min-h-[600px] bg-slate-900/30 rounded-2xl p-4 sm:p-8 border border-slate-700/50">
             <MemoryGame />
           </div>
         ) : (

@@ -69,7 +69,7 @@ function MemoryCard({ card, onCardClick }: { card: Card; onCardClick: (id: numbe
 
   return (
     <div
-      className="w-24 h-24 cursor-pointer"
+      className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 cursor-pointer"
       style={{ perspective: '1000px', filter: 'drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4))' }}
       onClick={() => onCardClick(card.id)}
     >
@@ -82,7 +82,7 @@ function MemoryCard({ card, onCardClick }: { card: Card; onCardClick: (id: numbe
         {/* Back Face */}
         <div className="absolute w-full h-full" style={{ backfaceVisibility: 'hidden' }}>
           <CardFace isMatched={false}>
-            <span className="text-5xl text-slate-400 font-bold">?</span>
+            <span className="text-3xl sm:text-4xl md:text-5xl text-slate-400 font-bold">?</span>
           </CardFace>
         </div>
 
@@ -93,10 +93,10 @@ function MemoryCard({ card, onCardClick }: { card: Card; onCardClick: (id: numbe
         >
           <CardFace isMatched={card.isMatched}>
             {card.content.type === 'icon' && CardIcon && (
-              <CardIcon size="50%" color={card.isMatched ? '#4ade80' : '#22d3ee'} />
+              <CardIcon size="100%" color={card.isMatched ? '#4ade80' : '#22d3ee'} className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12" />
             )}
             {card.content.type === 'text' && (
-              <p className={`text-center font-semibold ${card.isMatched ? 'text-green-400' : 'text-white'}`}>
+              <p className={`text-[10px] sm:text-xs md:text-sm text-center font-semibold leading-tight ${card.isMatched ? 'text-green-400' : 'text-white'}`}>
                 {card.content.value as string}
               </p>
             )}
@@ -158,20 +158,22 @@ export function MemoryGame() {
   };
 
   return (
-    <div className="w-full flex flex-col items-center">
-      <div className="w-full flex justify-between items-center mb-8 max-w-4xl">
-        <h2 className="text-4xl text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 whitespace-nowrap">Juego de Memoria</h2>
-        <div className="text-right">
-          <p className="text-xl text-white">Movimientos: {moves}</p>
+    <div className="w-full flex flex-col items-center px-4">
+      <div className="w-full flex flex-col sm:flex-row justify-between items-center gap-4 mb-8 max-w-4xl">
+        <h2 className="text-3xl md:text-4xl text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 font-bold text-center sm:text-left">
+          Juego de Memoria
+        </h2>
+        <div className="flex flex-row sm:flex-col items-center sm:items-end gap-4 sm:gap-2">
+          <p className="text-lg md:text-xl text-white">Movimientos: {moves}</p>
           <button
             onClick={handleReset}
-            className="mt-2 px-4 py-2 bg-cyan-500 text-white rounded-lg hover:bg-cyan-600 transition-colors"
+            className="px-4 py-2 bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-lg hover:shadow-lg hover:shadow-cyan-500/50 transition-all duration-300 transform hover:scale-105 text-sm md:text-base"
           >
             Reiniciar
           </button>
         </div>
       </div>
-      <div className="grid gap-4" style={{ gridTemplateColumns: 'repeat(6, minmax(0, 1fr))' }}>
+      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3 sm:gap-4 max-w-full overflow-hidden">
         {cards.map(card => (
           <MemoryCard key={card.id} card={card} onCardClick={handleCardClick} />
         ))}

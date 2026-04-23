@@ -1,4 +1,4 @@
-import { Github, Linkedin, Mail, Heart } from 'lucide-react';
+import { Github, Linkedin, Mail, Heart, Phone } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export function Footer() {
@@ -9,14 +9,14 @@ export function Footer() {
           <div className="flex items-center gap-2 text-slate-400">
             <span>Hecho con</span>
             <Heart size={16} className="text-red-500 fill-red-500" />
-            <span>© 2025</span>
+            <span>© 2026</span>
             <span className="mx-2">•</span>
             <Link to="/privacy-policy" className="hover:text-cyan-400 transition-colors text-sm">Política de Privacidad</Link>
           </div>
 
           <div className="flex items-center gap-4">
             <a
-              href="https://github.com"
+              href="https://github.com/RuslanKomarytskiyFilnyak/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-slate-400 hover:text-cyan-400 transition-colors"
@@ -24,7 +24,7 @@ export function Footer() {
               <Github size={20} />
             </a>
             <a
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/in/ruslan-komarytskiy-1665011ba/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-slate-400 hover:text-cyan-400 transition-colors"
@@ -32,10 +32,16 @@ export function Footer() {
               <Linkedin size={20} />
             </a>
             <a
-              href="mailto:tu@email.com"
+              href="mailto:kruslan55569@gmail.com"
               className="text-slate-400 hover:text-cyan-400 transition-colors"
             >
               <Mail size={20} />
+            </a>
+            <a
+              href="tel:618478435"
+              className="text-slate-400 hover:text-cyan-400 transition-colors"
+            >
+              <Phone size={20} />
             </a>
           </div>
         </div>

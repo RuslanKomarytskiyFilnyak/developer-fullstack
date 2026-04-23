@@ -27,7 +27,6 @@ export function Header() {
     { label: 'Sobre Mí', id: 'about' },
     { label: 'Proyectos', id: 'projects' },
     { label: 'Tecnologías', id: 'technologies' },
-    { label: 'Contacto', id: 'contact' },
   ];
 
   return (

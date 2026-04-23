@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { ExternalLink, Github } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { useState } from 'react';
 
@@ -8,11 +8,17 @@ export function Projects() {
 
   const projects = [
     {
+      title: 'Dreieck Consultora',
+      description: 'Landing page premium para consultora de Business Intelligence: diseño corporativo, análisis de datos y servicios de transformación digital.',
+      image: '/images/dreieck-consultora.png',
+      tech: ['React', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
+      demo: 'https://dreieck-consultora.github.io/dreieck-consultora/',
+    },
+    {
       title: 'Bebé Tracker',
       description: 'App de seguimiento completo para bebés: alimentación, sueño, pañales, salud y crecimiento. Dashboard en tiempo real con historial detallado.',
       image: '/images/bebe-tracker-cover.png',
       tech: ['React', 'TypeScript', 'Supabase', 'Charts'],
-      github: 'https://github.com',
       demo: 'https://bebe-tracker-six.vercel.app',
     },
     {
@@ -21,7 +27,6 @@ export function Projects() {
       image: '/images/nail-flow-cover.png',
       imagePosition: 'object-top',
       tech: ['Next.js', 'Supabase', 'Stripe', 'WhatsApp API'],
-      github: 'https://github.com',
       demo: 'https://nail-flow-phi.vercel.app',
     },
     {
@@ -29,7 +34,6 @@ export function Projects() {
       description: 'Sistema de gestión integral para pymes: control de inventario, facturación, clientes y reportes analíticos en tiempo real.',
       image: '/images/my-pyme-app.png',
       tech: ['React', 'Node.js', 'MongoDB', 'Express'],
-      github: 'https://github.com',
       demo: 'https://mypymeapp-front.vercel.app/',
     },
   ];
@@ -94,15 +98,6 @@ export function Projects() {
                 </div>
 
                 <div className="flex gap-4">
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-slate-300 hover:text-cyan-400 transition-colors"
-                  >
-                    <Github size={20} />
-                    <span>Código</span>
-                  </a>
                   <a
                     href={project.demo}
                     target="_blank"

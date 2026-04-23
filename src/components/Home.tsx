@@ -3,7 +3,6 @@ import { Hero } from './Hero';
 import { About } from './About';
 import { Projects } from './Projects';
 import { Technologies } from './Technologies';
-import { Contact } from './Contact';
 import { Footer } from './Footer';
 
 export function Home() {
@@ -15,7 +14,6 @@ export function Home() {
                 <About />
                 <Projects />
                 <Technologies />
-                <Contact />
             </main>
             <Footer />
         </>
