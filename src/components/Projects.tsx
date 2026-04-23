@@ -28,6 +28,7 @@ export function Projects() {
       imagePosition: 'object-top',
       tech: ['Next.js', 'Supabase', 'Stripe', 'WhatsApp API'],
       demo: 'https://nail-flow-phi.vercel.app',
+      status: 'development'
     },
     {
       title: 'MyPymeApp',
@@ -35,14 +36,6 @@ export function Projects() {
       image: '/images/my-pyme-app.png',
       tech: ['React', 'Node.js', 'MongoDB', 'Express'],
       demo: 'https://mypymeapp-front.vercel.app/',
-    },
-    {
-      title: 'Mail Flow',
-      description: 'Sistema inteligente de automatización de correos electrónicos y gestión de campañas marketing con IA integrada.',
-      image: '/images/mail-flow-cover.png',
-      tech: ['Next.js', 'Resend', 'OpenAI', 'PostgreSQL'],
-      demo: '#',
-      status: 'development'
     },
   ];
 
