@@ -47,92 +47,63 @@ export function Header() {
 
   return (
     <>
-      <motion.header
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled ? 'bg-slate-950/90 backdrop-blur-xl border-b border-white/5 shadow-2xl' : 'bg-transparent'
-        }`}
-      >
-        <nav className="container mx-auto px-6 h-20 flex items-center justify-between">
-          <button
-            onClick={() => scrollToSection('hero')}
-            className="flex items-center gap-1 text-2xl font-bold"
-          >
-            <span className="text-cyan-400">{'<'}</span>
-            <span className="text-white">Dev</span>
-            <span className="text-blue-500">{'/>'}</span>
-          </button>
+      <header className={`fixed top-0 left-0 right-0 z-50 transition-all ${isScrolled ? 'bg-slate-900/90 backdrop-blur-md h-16' : 'h-20 bg-transparent'}`}>
+        <nav className="container mx-auto px-6 h-full flex items-center justify-between">
+          <div onClick={() => scrollToSection('hero')} className="text-xl font-bold text-white cursor-pointer select-none">
+            <span className="text-cyan-400">{'<'}</span> Ruslan <span className="text-blue-500">{'/>'}</span>
+          </div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-10">
-            {navItems.map((item, index) => (
-              <button
-                key={item.id}
-                onClick={() => scrollToSection(item.id)}
-                className="text-sm font-medium text-slate-400 hover:text-white transition-colors relative group"
-              >
+          {/* Desktop Nav */}
+          <div className="hidden md:flex gap-8">
+            {navItems.map((item) => (
+              <button key={item.id} onClick={() => scrollToSection(item.id)} className="text-sm font-medium text-slate-300 hover:text-white transition-colors">
                 {item.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-cyan-400 group-hover:w-full transition-all"></span>
               </button>
             ))}
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMobileMenuOpen(true)}
-            className="md:hidden p-2 text-white"
-          >
+          {/* Hamburger */}
+          <button onClick={() => setIsMobileMenuOpen(true)} className="md:hidden p-2 text-white">
             <Menu size={28} />
           </button>
         </nav>
-      </motion.header>
+      </header>
 
-      {/* Mobile Navigation Overlay */}
+      {/* Full Screen Slide Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, scale: 1.1 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 1.1 }}
-            className="fixed inset-0 z-[999] bg-[#0f172a] md:hidden flex flex-col items-center justify-center p-6"
+            initial={{ x: '100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '100%' }}
+            transition={{ type: 'tween', duration: 0.3 }}
+            className="fixed inset-0 z-[1000] bg-slate-900 md:hidden flex flex-col pt-24 px-10"
           >
-            {/* Close Button */}
-            <button
+            {/* Close Button Inside Menu */}
+            <button 
               onClick={() => setIsMobileMenuOpen(false)}
-              className="absolute top-6 right-6 p-4 text-white bg-slate-800 rounded-full"
+              className="absolute top-6 right-6 p-4 text-white bg-slate-800 rounded-2xl border border-white/10"
             >
               <X size={32} />
             </button>
 
-            {/* Nav Items */}
-            <div className="flex flex-col gap-10 w-full max-w-xs">
-              {navItems.map((item, index) => (
-                <motion.button
+            {/* Menu Links */}
+            <div className="flex flex-col gap-6">
+              {navItems.map((item) => (
+                <button
                   key={item.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
                   onClick={() => scrollToSection(item.id)}
-                  className="flex items-center gap-5 group"
+                  className="flex items-center gap-6 p-6 bg-slate-800 rounded-3xl border border-white/5 text-left"
                 >
-                  <div className="w-14 h-14 bg-slate-800 rounded-2xl flex items-center justify-center text-cyan-400 group-hover:bg-cyan-500 group-hover:text-white transition-all">
-                    <item.icon size={28} />
-                  </div>
-                  <div className="flex flex-col">
-                    <span className="text-2xl font-bold text-white group-hover:text-cyan-400 transition-colors">
-                      {item.label}
-                    </span>
-                    <span className="text-sm text-slate-500">Explorar sección</span>
-                  </div>
-                </motion.button>
+                  <div className="text-cyan-400"><item.icon size={30} /></div>
+                  <span className="text-2xl font-bold text-white">{item.label}</span>
+                </button>
               ))}
             </div>
 
-            {/* Bottom Info */}
-            <div className="absolute bottom-12 flex flex-col items-center gap-2">
-              <div className="w-1 h-10 bg-gradient-to-b from-cyan-400 to-transparent"></div>
-              <span className="text-slate-500 text-sm font-medium uppercase tracking-[0.2em]">Portfolio 2026</span>
+            {/* Bottom Tag */}
+            <div className="mt-auto mb-10 text-center">
+              <p className="text-slate-500 text-sm font-mono tracking-tighter">© 2026 RUSLAN KOMARYTSKIY</p>
             </div>
           </motion.div>
         )}
