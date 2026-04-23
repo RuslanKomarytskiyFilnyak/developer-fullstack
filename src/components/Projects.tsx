@@ -36,6 +36,14 @@ export function Projects() {
       tech: ['React', 'Node.js', 'MongoDB', 'Express'],
       demo: 'https://mypymeapp-front.vercel.app/',
     },
+    {
+      title: 'Mail Flow',
+      description: 'Sistema inteligente de automatización de correos electrónicos y gestión de campañas marketing con IA integrada.',
+      image: '/images/mail-flow-cover.png',
+      tech: ['Next.js', 'Resend', 'OpenAI', 'PostgreSQL'],
+      demo: '#',
+      status: 'development'
+    },
   ];
 
   return (
@@ -58,59 +66,86 @@ export function Projects() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-8">
-          {projects.map((project, index) => (
-            <motion.div
-              key={project.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              onHoverStart={() => setHoveredIndex(index)}
-              onHoverEnd={() => setHoveredIndex(null)}
-              className="bg-slate-800 rounded-lg overflow-hidden border border-slate-700 hover:border-cyan-500 transition-all duration-300 group"
-              style={{
-                transform: hoveredIndex === index ? 'translateY(-8px)' : 'translateY(0)',
-              }}
-            >
-              <div className="relative overflow-hidden h-48">
-                <ImageWithFallback
-                  src={project.image}
-                  alt={project.title}
-                  className={`w-full h-full object-cover ${'imagePosition' in project ? (project as any).imagePosition : 'object-center'} group-hover:scale-110 transition-transform duration-300`}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent opacity-60"></div>
-              </div>
-
-              <div className="p-6">
-                <h3 className="text-xl text-white mb-3">{project.title}</h3>
-                <p className="text-slate-400 mb-4">{project.description}</p>
-
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.tech.map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-3 py-1 bg-slate-700 text-cyan-400 rounded-full text-sm"
-                    >
-                      {tech}
-                    </span>
-                  ))}
+        <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
+          {projects.map((project, index) => {
+            const isDevelopment = project.status === 'development';
+            
+            return (
+              <motion.div
+                key={project.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                onHoverStart={() => !isDevelopment && setHoveredIndex(index)}
+                onHoverEnd={() => setHoveredIndex(null)}
+                className={`bg-slate-800 rounded-lg overflow-hidden border border-slate-700 transition-all duration-300 group ${
+                  isDevelopment ? 'opacity-70 saturate-0 cursor-not-allowed grayscale' : 'hover:border-cyan-500'
+                }`}
+                style={{
+                  transform: (!isDevelopment && hoveredIndex === index) ? 'translateY(-8px)' : 'translateY(0)',
+                }}
+              >
+                <div className="relative overflow-hidden h-48">
+                  <ImageWithFallback
+                    src={project.image}
+                    alt={project.title}
+                    className={`w-full h-full object-cover ${'imagePosition' in project ? (project as any).imagePosition : 'object-center'} ${!isDevelopment && 'group-hover:scale-110'} transition-transform duration-300`}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent opacity-60"></div>
+                  
+                  {isDevelopment && (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="px-6 py-2 bg-slate-900/90 border border-white/10 rounded-full text-white font-bold text-sm backdrop-blur-md">
+                        PRÓXIMAMENTE
+                      </div>
+                    </div>
+                  )}
                 </div>
 
-                <div className="flex gap-4">
-                  <a
-                    href={project.demo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-slate-300 hover:text-cyan-400 transition-colors"
-                  >
-                    <ExternalLink size={20} />
-                    <span>Demo</span>
-                  </a>
+                <div className="p-6">
+                  <div className="flex justify-between items-start mb-3">
+                    <h3 className="text-xl text-white">{project.title}</h3>
+                    {isDevelopment && (
+                      <span className="px-2 py-1 bg-yellow-500/10 text-yellow-500 border border-yellow-500/20 rounded text-[10px] font-bold uppercase tracking-wider">
+                        En desarrollo
+                      </span>
+                    )}
+                  </div>
+                  <p className="text-slate-400 mb-4 h-12 overflow-hidden text-sm">{project.description}</p>
+
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {project.tech.map((tech) => (
+                      <span
+                        key={tech}
+                        className="px-2 py-1 bg-slate-700 text-slate-400 rounded-lg text-[11px]"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="flex gap-4">
+                    {isDevelopment ? (
+                      <div className="flex items-center gap-2 text-slate-500 text-sm font-medium italic">
+                        Desarrollo en curso...
+                      </div>
+                    ) : (
+                      <a
+                        href={project.demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 text-slate-300 hover:text-cyan-400 transition-colors"
+                      >
+                        <ExternalLink size={20} />
+                        <span>Demo Directa</span>
+                      </a>
+                    )}
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
