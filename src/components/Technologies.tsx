@@ -79,7 +79,7 @@ function PuzzlePiece({ tech, index, onDragStart, onDragEnd, isDragging, totalCol
   return (
     <div className="w-full" style={{ filter: 'drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4))', aspectRatio: '1 / 1' }}>
       <motion.div
-        drag
+        drag={window.innerWidth > 768}
         dragMomentum={false}
         dragElastic={0.1}
         onDragStart={handleDragStart}
@@ -152,8 +152,8 @@ export function Technologies() {
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 1024) setCols(8);
-      else if (window.innerWidth >= 768) setCols(4);
-      else setCols(2);
+      else if (window.innerWidth >= 768) setCols(6);
+      else setCols(4);
     };
 
     handleResize(); // Initial check
@@ -250,12 +250,12 @@ export function Technologies() {
             <MemoryGame />
           </div>
         ) : (
-          <div className="mb-16 bg-slate-900/30 rounded-2xl p-8 border border-slate-700/50">
+          <div className="mb-16 bg-slate-900/30 rounded-2xl p-4 sm:p-8 border border-slate-700/50">
             <div
-              className="grid gap-4 mx-auto"
+              className="grid gap-2 sm:gap-4 mx-auto"
               style={{
                 gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`,
-                maxWidth: cols === 8 ? '100%' : cols === 4 ? '600px' : '300px'
+                maxWidth: cols === 8 ? '100%' : cols === 6 ? '800px' : '100%'
               }}
             >
               {allTechnologies.map((tech, index) => (
