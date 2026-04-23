@@ -1,6 +1,7 @@
 import { Menu, X, Home, User, Briefcase, Cpu } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { createPortal } from 'react-dom';
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -47,67 +48,102 @@ export function Header() {
 
   return (
     <>
-      <header className={`fixed top-0 left-0 right-0 z-50 transition-all ${isScrolled ? 'bg-slate-900/90 backdrop-blur-md h-16' : 'h-20 bg-transparent'}`}>
-        <nav className="container mx-auto px-6 h-full flex items-center justify-between">
-          <div onClick={() => scrollToSection('hero')} className="text-xl font-bold text-white cursor-pointer select-none">
+      <header 
+        className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 ${
+          isScrolled ? 'bg-slate-900/95 shadow-xl h-16' : 'h-20 bg-transparent'
+        }`}
+      >
+        <nav className="max-w-7xl mx-auto px-6 h-full flex items-center justify-between">
+          <div 
+            onClick={() => scrollToSection('hero')} 
+            className="text-xl font-bold text-white cursor-pointer"
+          >
             <span className="text-cyan-400">{'<'}</span> Ruslan <span className="text-blue-500">{'/>'}</span>
           </div>
 
-          {/* Desktop Nav */}
-          <div className="hidden md:flex gap-8">
+          {/* Desktop */}
+          <div className="hidden md:flex gap-10">
             {navItems.map((item) => (
-              <button key={item.id} onClick={() => scrollToSection(item.id)} className="text-sm font-medium text-slate-300 hover:text-white transition-colors">
+              <button 
+                key={item.id} 
+                onClick={() => scrollToSection(item.id)}
+                className="text-slate-300 hover:text-white font-medium transition-colors"
+              >
                 {item.label}
               </button>
             ))}
           </div>
 
-          {/* Hamburger */}
-          <button onClick={() => setIsMobileMenuOpen(true)} className="md:hidden p-2 text-white">
+          {/* Mobile Button */}
+          <button 
+            onClick={() => setIsMobileMenuOpen(true)}
+            className="md:hidden p-2 text-white bg-slate-800/50 rounded-lg"
+          >
             <Menu size={28} />
           </button>
         </nav>
       </header>
 
-      {/* Full Screen Slide Menu */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ x: '100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '100%' }}
-            transition={{ type: 'tween', duration: 0.3 }}
-            className="fixed inset-0 z-[1000] bg-slate-900 md:hidden flex flex-col pt-24 px-10"
-          >
-            {/* Close Button Inside Menu */}
-            <button 
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="absolute top-6 right-6 p-4 text-white bg-slate-800 rounded-2xl border border-white/10"
+      {/* Mobile Menu via Portal to ensure it is ABOVE EVERYTHING */}
+      {typeof document !== 'undefined' && createPortal(
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, x: '100%' }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: '100%' }}
+              transition={{ type: 'tween', duration: 0.3 }}
+              style={{
+                position: 'fixed',
+                top: 0,
+                left: 0,
+                width: '100vw',
+                height: '100vh',
+                backgroundColor: '#0f172a',
+                zIndex: 99999,
+                display: 'flex',
+                flexDirection: 'column'
+              }}
+              className="md:hidden"
             >
-              <X size={32} />
-            </button>
-
-            {/* Menu Links */}
-            <div className="flex flex-col gap-6">
-              {navItems.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => scrollToSection(item.id)}
-                  className="flex items-center gap-6 p-6 bg-slate-800 rounded-3xl border border-white/5 text-left"
+              {/* Internal Header for Menu */}
+              <div className="h-20 px-6 flex items-center justify-between border-b border-white/5 shadow-2xl">
+                <div className="text-xl font-bold text-white">
+                  <span className="text-cyan-400"> MENU </span>
+                </div>
+                <button 
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="p-3 text-white bg-slate-800 rounded-xl"
                 >
-                  <div className="text-cyan-400"><item.icon size={30} /></div>
-                  <span className="text-2xl font-bold text-white">{item.label}</span>
+                  <X size={28} />
                 </button>
-              ))}
-            </div>
+              </div>
 
-            {/* Bottom Tag */}
-            <div className="mt-auto mb-10 text-center">
-              <p className="text-slate-500 text-sm font-mono tracking-tighter">© 2026 RUSLAN KOMARYTSKIY</p>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+              {/* Items */}
+              <div className="flex-1 flex flex-col justify-center gap-8 px-10">
+                {navItems.map((item) => (
+                  <button
+                    key={item.id}
+                    onClick={() => scrollToSection(item.id)}
+                    className="flex items-center gap-6 group"
+                  >
+                    <div className="w-16 h-16 bg-slate-800 rounded-3xl flex items-center justify-center text-cyan-400">
+                      <item.icon size={32} />
+                    </div>
+                    <span className="text-3xl font-bold text-white">{item.label}</span>
+                  </button>
+                ))}
+              </div>
+
+              {/* Bottom */}
+              <div className="p-12 text-center border-t border-white/5">
+                <p className="text-slate-600 font-mono">RUSLAN KOMARYTSKIY — 2026</p>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
     </>
   );
 }
