@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { ArrowDown, Github, Linkedin, Mail } from 'lucide-react';
+import { ArrowDown, Github, Linkedin, Mail, Download } from 'lucide-react';
 import { FaWhatsapp } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
 
@@ -92,15 +92,28 @@ export function Hero() {
             </a>
           </motion.div>
 
-          <motion.button
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            onClick={scrollToProjects}
-            className="px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-lg hover:shadow-lg hover:shadow-cyan-500/50 transition-all duration-300 hover:scale-105"
+            className="flex flex-row flex-wrap items-center justify-center gap-4"
           >
-            Ver mis proyectos
-          </motion.button>
+            <button
+              onClick={scrollToProjects}
+              className="px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-lg hover:shadow-lg hover:shadow-cyan-500/50 transition-all duration-300 hover:scale-105"
+            >
+              Ver mis proyectos
+            </button>
+            <a
+              href={`/CV_Ruslan_2026.pdf?v=${Date.now()}`}
+              download="CV_Ruslan_2026.pdf"
+              style={{ backgroundImage: 'linear-gradient(to right, #ec4899, #f43f5e)' }}
+              className="px-8 py-4 flex items-center justify-center gap-2 text-white rounded-lg hover:shadow-lg transition-all duration-300 hover:scale-105"
+            >
+              <Download size={20} />
+              Descargar CV
+            </a>
+          </motion.div>
 
           <motion.div
             initial={{ opacity: 0 }}
